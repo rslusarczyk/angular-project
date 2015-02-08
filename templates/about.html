@@ -1,0 +1,24 @@
+    <div ng-cloak>
+    	<p>duasdasdasdasda</p>
+  
+        <ul>
+            
+            <li ng-repeat="(id,item) in items">
+                <span ng-hide="startEdit" class="ng-hide">{{item.text}}</span>
+                <div ng-show="startEdit">
+               <form ng-submit="updateItem(id); startEdit = false">
+                    <input type="text" ng-model="item.text" />
+               </form>    
+                </div>
+
+                <button class='btn btn-mini' ng-click='startEdit = true'>edit</button>
+            </li>
+        </ul>
+  
+           <form ng-submit="addItem(newItem)">
+            <input type="text" ng-model="newItem" />
+           </form>
+   
+        
+    </div>
+   
