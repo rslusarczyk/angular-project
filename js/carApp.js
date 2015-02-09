@@ -1,5 +1,5 @@
 angular.module("carApp", ["firebase", "ui.router"])
-    .constant('FIREBASE_URL','https://repo-test-rslusarczyk.firebaseio.com/')
+    .constant('FIREBASE_URL','https://carapp-2015.firebaseio.com/')
     
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -8,61 +8,38 @@ angular.module("carApp", ["firebase", "ui.router"])
                 templateUrl: 'templates/home.html'
         })
             .state('about', {
-                url: '/list',
-                templateUrl: 'templates/list.html',
+                url: '/about',
+                templateUrl: 'templates/about.html',
                 controller: 'myCtrl'
-        })
-            .state('list.item', {
-                url: '/:item',
-                templateUrl: 'templates/list.item.html',
-                controller: function($scope, $stateParams) {
-                    $scope.item = $stateParams.item;
-                }
         })
   $urlRouterProvider.otherwise('/home');
 })
     
-    .controller("myCtrl", function($scope, ItemsService) {
-        $scope.items = ItemsService.getItems();
-        $scope.addItem = function(text) {
-            ItemsService.addItem({text: text});
-            
-        }
-        $scope.removeItem = function(id) { 
-            ItemsService.removeItem(id);
-        }
-        
-        $scope.updateItem = function(id) { 
-            $scope.startEdit = false;
-            ItemsService.updateItem(id);
-        }
-    })
-    
     .factory('ItemsService', function($firebase, FIREBASE_URL){
-        var ref = new Firebase(FIREBASE_URL + "/items");
+        var ref = new Firebase(FIREBASE_URL + "/carsCategories");
         var sync = $firebase(ref);
-        var items = sync.$asArray()
+        var carsCategories = sync.$asArray()
         
-        var getItems = function() {
-            return items;
+        var getCarsCategories = function() {
+            return carsCategories;
         };
         
-        var addItem = function(item) {
-            items.$add(item);
+        var addCarCategory = function(name) {
+            carsCategories.$add(name);
         }
         
-        var removeItem = function(id) {
-            items.$remove(id);
+        var removeCarCategory = function(id) {
+            carsCategories.$remove(id);
         }
         
-        var updateItem = function(id) {
-            items.$update(id);
+        var updateCarCategory = function(id) {
+            carsCategories.$save(id);
         }
         return {
-            getItems: getItems,
-            addItem: addItem,
-            removeItem: removeItem,
-            updateItem: updateItem
+            getCarsCategories: getCarsCategories,
+            addCarCategory: addCarCategory,
+            removeCarCategory: removeCarCategory,
+            updateCarCategory: updateCarCategory
         }
     })
 

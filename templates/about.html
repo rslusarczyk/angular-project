@@ -1,23 +1,25 @@
     <div ng-cloak>
-    	<p>duasdasdasdasda</p>
-  
         <ul>
-            
-            <li ng-repeat="(id,item) in items">
-                <span ng-hide="startEdit" class="ng-hide">{{item.text}}</span>
+            <li ng-repeat="(id,category) in carsCategories">
+                <span ng-hide="startEdit" class="ng-hide">{{category.name}}</span>
                 <div ng-show="startEdit">
-               <form ng-submit="updateItem(id); startEdit = false">
-                    <input type="text" ng-model="item.text" />
-               </form>    
+					<form ng-submit="updateCarCategory(id); startEdit = false">
+					    <input type="text" ng-model="category.name" />
+					    <input type="submit" id="submit" value="Zapisz" />
+					</form>    
                 </div>
-
                 <button class='btn btn-mini' ng-click='startEdit = true'>edit</button>
+				<form ng-submit="category.cars.push(car);updateCarCategory(id);">
+					    <input type="text" ng-model="car.name" />
+					    <input type="submit" id="submit222" value="Dodaj Auto" />
+				</form>   
             </li>
         </ul>
   
-           <form ng-submit="addItem(newItem)">
-            <input type="text" ng-model="newItem" />
-           </form>
+       <form ng-submit="addCarCategory(name, {})">
+    		<input type="text" ng-model="name" />
+    		<input type="submit" id="submit" value="Dodaj Kategorię" />
+       </form>
    
         
     </div>

@@ -1,15 +1,18 @@
 angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
-        $scope.items = ItemsService.getItems();
-        $scope.addItem = function(text) {
-            ItemsService.addItem({text: text});
+        
+        $scope.car = {};
+        $scope.carsCategories = ItemsService.getCarsCategories();
+        $scope.addCarCategory = function(name, cars) {
+            ItemsService.addCarCategory({name: name, cars: cars});
             
         }
-        $scope.removeItem = function(id) { 
-            ItemsService.removeItem(id);
+        $scope.removeCarCategory = function(id) { 
+            ItemsService.removeCarCategory(id);
         }
         
-        $scope.updateItem = function(id) { 
+        $scope.updateCarCategory = function(id) { 
             $scope.startEdit = false;
-            ItemsService.updateItem(id);
+            ItemsService.updateCarCategory(id); 
         }
+
     })
