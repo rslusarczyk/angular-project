@@ -1,5 +1,5 @@
     <div ng-cloak>
-        <ul>
+       <ul>
             <li ng-repeat="(id,category) in carsCategories">
                 <span ng-hide="startEdit" class="ng-hide">{{category.name}}</span>
                 <div ng-show="startEdit">
@@ -9,7 +9,7 @@
 					</form>    
                 </div>
                 <button class='btn btn-mini' ng-click='startEdit = true'>edit</button>
-				<form ng-submit="category.cars.push(car);updateCarCategory(id);">
+				<form ng-submit="addCar(category,car);updateCarCategory(id);">
 					    <input type="text" ng-model="car.name" />
 					    <input type="submit" id="submit222" value="Dodaj Auto" />
 				</form>   
@@ -20,7 +20,65 @@
     		<input type="text" ng-model="name" />
     		<input type="submit" id="submit" value="Dodaj Kategorię" />
        </form>
-   
+
+
+        <div  class="row">
+            <div ng-repeat="(id,category) in carsCategories" class="col-md-3">
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                </button>  
+                <ul class="nav nav-pills nav-justified">
+                  <li role="presentation" class="active"><a href="">{{category.name}}</a></li>
+                </ul>
+                <div class="panel panel-default" >
+                    <div class="panel-heading" ng-click="showAddCarPanel(category)">Dodaj</div>                
+                    <form ng-show="category.addCarPanelAvailable" ng-submit="addCar(category,car);updateCarCategory(id);">
+                        <div class="form-group">
+                            <label for="carBrand">Marka:</label>
+                            <input type="text" class="form-control" id="carBrand" placeholder="Marka" ng-model="car.brand">
+                        </div>
+                        <div class="form-group">
+                            <label for="carModel">Model:</label>
+                            <input type="text" class="form-control" id="carModel" placeholder="Model" ng-model="car.model">
+                        </div>
+                        <div class="form-group">
+                            <label for="carYear">Rok Produkcji</label>
+                            <input type="text" class="form-control" id="carYear" placeholder="Rok" ng-model="car.year">
+                        </div>       
+                        <div class="form-group">
+                            <label for="carEngine">Rodzaj silnika</label>
+                            <input type="text" class="form-control" id="carEngine" placeholder="Silnik" ng-model="car.engine">
+                        </div>    
+                        <div class="form-group">
+                            <label for="carDescription">Dodatkowe informacje</label>
+                            <input type="text" class="form-control" id="carDescription" placeholder="Opis" ng-model="car.description">
+                        </div>     
+                        <div class="form-group">
+                            <label for="carPrice">Cena</label>
+                            <input type="text" class="form-control" id="carPrice" placeholder="Cena" ng-model="car.price">
+                        </div>                                                                       
+                        <button type="submit" class="btn btn-default" ng-click="showAddCarPanel(category)">Dodaj Auto</button>
+                    </form>
+                </div>
+                
+                <div ng-repeat="(id,car) in category.cars" class="panel panel-info">
+                    <div class="panel-heading">{{id + 1}}. {{car.brand}} {{car.model}}</div>
+                    <ul class="list-group">
+                        <li class="list-group-item">Marka: {{car.brand}}</li>
+                        <li class="list-group-item">Model: {{car.model}}</li>
+                        <li class="list-group-item">Rok: {{car.year}}</li>
+                        <li class="list-group-item">Silnik: {{car.engine}}</li>
+                        <li class="list-group-item">Dodatkowy opis: {{car.description}}</li>
+                        <li class="list-group-item">Cena: {{car.price}}</li>
+                      </ul>
+                </div>
+            </div>
+
+        </div>
+
         
-    </div>
+</div>
    
