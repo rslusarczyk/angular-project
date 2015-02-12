@@ -1,6 +1,7 @@
 angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
-
+        $scope.carToAdd = {brand:"",model:"", year:"", engine:"",description:"",price:""};
         $scope.carEdit = {id: -1000, carId: -1000};
+        $scope.carDetails = {id: -1000, carId: -1000};
         $scope.carCategoryEdit = {id: -1000};
         $scope.carsCategories = ItemsService.getCarsCategories();
         $scope.addCarCategory = function(name, cars) {
@@ -23,6 +24,8 @@ angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
                 category.cars = new Array();
                 category.cars.push(car);
             }
+
+            $scope.carToAdd = {brand:"",model:"", year:"", engine:"",description:"",price:""};
         }
 
         $scope.showAddCarPanel = function(category)  {
@@ -48,6 +51,22 @@ angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
                 return false;
             }
         }
+
+        $scope.showCarDetails = function(id, carId) {
+            if($scope.carDetails.id == id && $scope.carDetails.carId == carId) {
+                if($scope.editCar(id, carId)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }   
+
+        $scope.removeCar(id, carId) {
+            
+        }     
 
 
     })
