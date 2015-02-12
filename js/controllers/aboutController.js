@@ -1,5 +1,7 @@
 angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
-        
+
+        $scope.carEdit = {id: -1000, carId: -1000};
+        $scope.carCategoryEdit = {id: -1000};
         $scope.carsCategories = ItemsService.getCarsCategories();
         $scope.addCarCategory = function(name, cars) {
             ItemsService.addCarCategory({name: name, cars: cars});
@@ -38,5 +40,14 @@ angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
             }
             ItemsService.updateCarCategory(category);
         }
- 
+        
+        $scope.editCar = function(id, carId) {
+            if($scope.carEdit.id == id && $scope.carEdit.carId == carId) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
     })
