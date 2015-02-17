@@ -12,11 +12,17 @@
             <div ng-repeat="(id,category) in carsCategories" class="col-md-3">
                 <ul class="nav nav-pills nav-justified">
                     <li role="presentation" class="active" style="text-align: left;">
-                        <a href="">{{category.name}}
-                            <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;" ng-click="">
+                        <a href="">
+                            <span ng-hide="showEditCategory(id, category)">{{category.name}}</span>
+
+                            <div class="form-group" ng-show="showEditCategory(id, category)">
+                                <input type="text" class="form-control" id="categoryEdit" placeholder="Nazwa" ng-model="category.name">
+                            </div>
+
+                            <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;" ng-click="updateCategoryEditVisibility(id)">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;">
+                            <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;" ng-click="removeCarCategory(id)">
                                 <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                             </button> 
                         </a>
@@ -61,7 +67,7 @@
                         <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;" ng-click="carEdit.id = id; carEdit.carId = carId;">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;">
+                        <button type="button" class="btn btn-default btn-sm" style="float: right; top: -5px; position: relative;" ng-click="removeCar(id, carId)">
                             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                         </button> 
                     </div>

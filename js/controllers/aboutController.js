@@ -13,7 +13,6 @@ angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
         }
         
         $scope.updateCarCategory = function(id) { 
-            $scope.startEdit = false;
             ItemsService.updateCarCategory(id); 
         }
 
@@ -64,9 +63,28 @@ angular.module("carApp").controller("myCtrl", function($scope, ItemsService) {
             }
         }   
 
-        $scope.removeCar(id, carId) {
-            
+        $scope.removeCar = function(id, carId) {
+            $scope.carsCategories[id].cars.splice(carId, 1);
+            $scope.updateCarCategory(id);
         }     
+
+        $scope.updateCategoryEditVisibility = function(id) {
+            if($scope.carCategoryEdit.id == -1000) {
+                $scope.carCategoryEdit.id = id;
+            } else {
+                $scope.carCategoryEdit.id = -1000;
+                $scope.updateCarCategory(id);
+            }
+        }   
+
+        $scope.showEditCategory = function(categoryId) {
+            if($scope.carCategoryEdit.id == categoryId) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }  
 
 
     })
