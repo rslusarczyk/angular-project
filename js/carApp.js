@@ -7,9 +7,9 @@ angular.module("carApp", ["firebase", "ui.router"])
                 url: '/home',
                 templateUrl: 'templates/home.html'
         })
-            .state('about', {
-                url: '/about',
-                templateUrl: 'templates/about.html',
+            .state('list', {
+                url: '/list',
+                templateUrl: 'templates/list.html',
                 controller: 'myCtrl'
         })
   $urlRouterProvider.otherwise('/home');
